@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -76,15 +77,18 @@ namespace Assignment1
     }
     class Question1
     {
+        //function to check if the robot comes to the initial point or not
+        // bool returns true if the string is pangram else false
         public static bool JudgeCircle(string moves)
         {
             try
             {
+                // Initial coordinates
                 int x = 0;
                 int y = 0;
-
+                // converting the string to char array
                 char[] array = moves.ToCharArray();
-
+                //Loop through the entire string
                 for (int i = 0; i < array.Length; i++)
                 {
                     if (array[i] == 'R')
@@ -107,6 +111,8 @@ namespace Assignment1
     }
     public class Question2
     {
+        //function used to check if the given sentence is pangram or not
+        // bool returns true if the string is pangram else false
         public static bool CheckIfPangram(string str)
         {
             try
@@ -114,7 +120,8 @@ namespace Assignment1
                 bool[] isUsed = new bool[26];
                 int ai = (int)'a';
                 int total = 0;
-
+                //converting the string to lower case
+                //reading individual characters in the string using CharEnumerator method and moving to next character using MoveNext method
                 for (CharEnumerator en = str.ToLower().GetEnumerator(); en.MoveNext();)
                 {
                     int d = (int)en.Current - ai;
@@ -137,12 +144,14 @@ namespace Assignment1
     }
     class Question3
     {
+        //function to find the number of identical pairs in the given array
         public static int NumIdenticalPairs(int[] nums)
         {
             try
             {
+                // Initialize the output in variable ans
                 int ans = 0;
-
+                //Condiser all possible pairs and check their sums
                 for (int i = 0; i < nums.Length - 1; i++)
                 {
                     for (int j = i + 1; j < nums.Length; j++)
@@ -163,10 +172,12 @@ namespace Assignment1
     }
     class Question4
     {
+        //function to find the pivot index
         public static int PivotIndex(int[] nums)
         {
             try
             {
+                // Count the prefix sum of nums: prefix[i] = nums[0] + nums[1] + .. + nums[i - 1]
                 int len = nums.Length;
                 int sum = 0;
                 int[] prefix = new int[len];
@@ -176,7 +187,7 @@ namespace Assignment1
                     sum += nums[i];
                 }
 
-
+                //Find the pivot using the sum
                 for (int i = 0; i < len; i++)
                 {
                     if (prefix[i] == prefix[len - 1] - prefix[i] - nums[i] + nums[len - 1])
@@ -198,21 +209,21 @@ namespace Assignment1
     }
     class Program5
     {
+        //function to merge 2 strings alternatively
         public static string merge(string word1, string word2)
         {
             try
             {
+                //to store the output
                 string result = "";
 
-
+                //for every index in the strings
                 for (int i = 0; i < word1.Length || i < word2.Length; i++)
                 {
-
-
+                    //first choose the ith character in the first string if exists
                     if (i < word1.Length)
                         result += word1[i];
-
-
+                    //Now choose the ith character in the second string if exists
                     if (i < word2.Length)
                         result += word2[i];
                 }
@@ -228,19 +239,25 @@ namespace Assignment1
     }
     class Program6
     {
+        // function to convert the given sentence to Goat Latin 
         public static string ToGoatLatin(string sentence)
         {
             try
             {
+                //removing the spaces in the given sentence
                 var words = sentence.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                string suffix = "a", result = "";
+                string suffix = "a", 
+                result = "";
                 var vowels = new List<char>() { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u' };
+                // repeat the following process for every word in the sentence
                 foreach (var word in words)
                 {
+                    //if the first letter of the first word is vowel then append 'ma' and 'a' 
                     if (vowels.Any(x => x == word[0]))
                     {
                         result += word + "ma" + suffix + " ";
                     }
+                    //if the first letter of the first word is not a vowel then append the 'first letter', 'ma' and 'a'
                     else
                     {
                         result += word.Substring(1) + word[0] + "ma" + suffix + " ";
