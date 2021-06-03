@@ -25,8 +25,8 @@ namespace Assignment1
 
             // Question2
             Console.WriteLine(" Q2: Enter the string to check for pangram:");
-            string str = Console.ReadLine();
-            bool flag = Question2.CheckIfPangram(str);
+            string s = Console.ReadLine();
+            bool flag = Question2.CheckIfPangram(s);
             if (flag)
             {
                 Console.WriteLine("Yes, the given string is a pangram");
@@ -38,8 +38,8 @@ namespace Assignment1
             Console.WriteLine();
 
             //Question 3
-            int[] nums = { 1, 2, 3, 1, 1, 3 };
-            int gp = Question3.NumIdenticalPairs(nums);
+            int[] arr = { 1, 2, 3, 1, 1, 3 };
+            int gp = Question3.NumIdenticalPairs(arr);
             Console.WriteLine("Q3:");
             Console.WriteLine("The number of IdenticalPairs in the array are {0}:", gp);
 
@@ -63,13 +63,13 @@ namespace Assignment1
             String word1 = Console.ReadLine();
             Console.WriteLine("Enter the Second Word:");
             String word2 = Console.ReadLine();
-            String merged = Program5.merge(word1, word2);
+            String merged = Question5.MergeAlternately(word1, word2);
             Console.WriteLine("The Merged Sentence fromed by both words is {0}", merged);
 
             //Question 6
             Console.WriteLine("Q6: Enter the sentence to convert:");
             string sentence = Console.ReadLine();
-            string goatLatin = Program6.ToGoatLatin(sentence);
+            string goatLatin = Question6.ToGoatLatin(sentence);
             Console.WriteLine("Goat Latin for the Given Sentence is {0}", goatLatin);
             Console.WriteLine();
 
@@ -84,23 +84,23 @@ namespace Assignment1
             try
             {
                 // Initial coordinates
-                int x = 0;
-                int y = 0;
+                int a = 0;
+                int b = 0;
                 // converting the string to char array
-                char[] array = moves.ToCharArray();
+                char[] xyz = moves.ToCharArray();
                 //Loop through the entire string
-                for (int i = 0; i < array.Length; i++)
+                for (int i = 0; i < xyz.Length; i++)
                 {
-                    if (array[i] == 'R')
-                        x++;
-                    else if (array[i] == 'L')
-                        x--;
-                    else if (array[i] == 'U')
-                        y++;
-                    else if (array[i] == 'D')
-                        y--;
+                    if (xyz[i] == 'R')
+                        a++;
+                    else if (xyz[i] == 'L')
+                        a--;
+                    else if (xyz[i] == 'U')
+                        b++;
+                    else if (xyz[i] == 'D')
+                        b--;
                 }
-                return (x == 0 && y == 0);
+                return (a == 0 && b == 0);
             }
             catch (Exception)
             {
@@ -117,22 +117,22 @@ namespace Assignment1
         {
             try
             {
-                bool[] isUsed = new bool[26];
-                int ai = (int)'a';
-                int total = 0;
+                bool[] x = new bool[26];
+                int y = (int)'a';
+                int result = 0;
                 //converting the string to lower case
                 //reading individual characters in the string using CharEnumerator method and moving to next character using MoveNext method
-                for (CharEnumerator en = str.ToLower().GetEnumerator(); en.MoveNext();)
+                for (CharEnumerator cher = str.ToLower().GetEnumerator(); cher.MoveNext();)
                 {
-                    int d = (int)en.Current - ai;
-                    if (d >= 0 && d < 26)
-                        if (!isUsed[d])
+                    int i = (int)cher.Current - y;
+                    if (i >= 0 && i < 26)
+                        if (!x[i])
                         {
-                            isUsed[d] = true;
-                            total++;
+                            x[i] = true;
+                            result++;
                         }
                 }
-                return (total == 26);
+                return (result == 26);
             }
 
             catch (Exception)
@@ -145,24 +145,24 @@ namespace Assignment1
     class Question3
     {
         //function to find the number of identical pairs in the given array
-        public static int NumIdenticalPairs(int[] nums)
+        public static int NumIdenticalPairs(int[] numbers)
         {
             try
             {
                 // Initialize the output in variable ans
-                int ans = 0;
+                int result = 0;
                 //Condiser all possible pairs and check their sums
-                for (int i = 0; i < nums.Length - 1; i++)
+                for (int x = 0; x < numbers.Length - 1; x++)
                 {
-                    for (int j = i + 1; j < nums.Length; j++)
+                    for (int y = x + 1; y < numbers.Length; y++)
                     {
-                        if (nums[i] == nums[j])
+                        if (numbers[x] == numbers[y])
                         {
-                            ans++;
+                            result++;
                         }
                     }
                 }
-                return ans;
+                return result;
             }
             catch (Exception)
             {
@@ -173,24 +173,24 @@ namespace Assignment1
     class Question4
     {
         //function to find the pivot index
-        public static int PivotIndex(int[] nums)
+        public static int PivotIndex(int[] numbers)
         {
             try
             {
                 // Count the prefix sum of nums: prefix[i] = nums[0] + nums[1] + .. + nums[i - 1]
-                int len = nums.Length;
-                int sum = 0;
-                int[] prefix = new int[len];
-                for (int i = 0; i < len; i++)
+                int l = numbers.Length;
+                int z = 0;
+                int[] p = new int[l];
+                for (int i = 0; i < l; i++)
                 {
-                    prefix[i] = sum;
-                    sum += nums[i];
+                    p[i] = z;
+                    z += numbers[i];
                 }
 
                 //Find the pivot using the sum
-                for (int i = 0; i < len; i++)
+                for (int i = 0; i < l; i++)
                 {
-                    if (prefix[i] == prefix[len - 1] - prefix[i] - nums[i] + nums[len - 1])
+                    if (p[i] == p[l - 1] - p[i] - numbers[i] + numbers[l - 1])
                     {
                         return i;
                     }
@@ -198,46 +198,46 @@ namespace Assignment1
 
                 return -1;
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
-                Console.WriteLine("An error occured: " + e.Message);
+                Console.WriteLine("An error occured: " + exp.Message);
                 throw;
 
             }
         }
 
     }
-    class Program5
+    class Question5
     {
         //function to merge 2 strings alternatively
-        public static string merge(string word1, string word2)
+        public static string MergeAlternately(string word1, string word2)
         {
             try
             {
                 //to store the output
-                string result = "";
+                string output = "";
 
                 //for every index in the strings
                 for (int i = 0; i < word1.Length || i < word2.Length; i++)
                 {
                     //first choose the ith character in the first string if exists
                     if (i < word1.Length)
-                        result += word1[i];
+                        output += word1[i];
                     //Now choose the ith character in the second string if exists
                     if (i < word2.Length)
-                        result += word2[i];
+                        output += word2[i];
                 }
-                return result;
+                return output;
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(exp.Message);
                 throw;
 
             }
         }
     }
-    class Program6
+    class Question6
     {
         // function to convert the given sentence to Goat Latin 
         public static string ToGoatLatin(string sentence)
@@ -245,29 +245,29 @@ namespace Assignment1
             try
             {
                 //removing the spaces in the given sentence
-                var words = sentence.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                string suffix = "a", 
-                result = "";
+                var list_of_words = sentence.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string s = "a", 
+                output = "";
                 var vowels = new List<char>() { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u' };
                 // repeat the following process for every word in the sentence
-                foreach (var word in words)
+                foreach (var word in list_of_words)
                 {
                     //if the first letter of the first word is vowel then append 'ma' and 'a' 
-                    if (vowels.Any(x => x == word[0]))
+                    if (vowels.Any(z => z == word[0]))
                     {
-                        result += word + "ma" + suffix + " ";
+                        output += word + "ma" + s + " ";
                     }
                     //if the first letter of the first word is not a vowel then append the 'first letter', 'ma' and 'a'
                     else
                     {
-                        result += word.Substring(1) + word[0] + "ma" + suffix + " ";
+                        output += word.Substring(1) + word[0] + "ma" + s + " ";
                     }
 
-                    suffix += "a";
+                    s += "a";
 
                 }
 
-                return result.Substring(0, result.Length - 1);
+                return output.Substring(0, output.Length - 1);
             }
             catch (Exception)
             {
